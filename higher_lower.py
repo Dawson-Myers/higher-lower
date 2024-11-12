@@ -35,7 +35,7 @@ def higher_lower():
 
 def play_game():
     pass
-    """ FIXME: Add logic for game state actions including updating CORRECT or INCORRECT status, Score, and Question changes."""
+    """ FIXME: Add logic for game state actions including updating CORRECT or INCORRECT status, Score, and input changes."""
 
 name, follower_count, description, country = game_data()
 
