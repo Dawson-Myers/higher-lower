@@ -1,5 +1,5 @@
 import random
-import game_data as gd
+from game_data import data
 import art
 """
 Print Art.Logo
@@ -15,29 +15,17 @@ if answer INCORRECT update post
 """
 
 # for each right answer the game data moves up to introduce a new comparison for B.
-data = gd.data
+
 
 def random_index():
-    return random.randint(0, len(gd.data) - 1)
+    return random.randint(0, len(data) - 1)
 
 def game_data():
-    pass
-
-def name():
     name = data[random_index()]['name']
-    return name
-
-def follower_count():
     follower_count = data[random_index()]['follower_count']
-    return follower_count
-
-def description():
     description = data[random_index()]['description']
-    return description
-
-def country():
     country = data[random_index()]['country']
-    return country
+    return name, follower_count, description, country
 
 
     # print(gd.data[random_index()])
@@ -49,8 +37,10 @@ def play_game():
     pass
     """ FIXME: Add logic for game state actions including updating CORRECT or INCORRECT status, Score, and Question changes."""
 
+name, follower_count, description, country = game_data()
 
-print(name())
-print(follower_count())
-print(description())
-print(country())
+print(name)
+print(follower_count)
+print(description)
+print(country)
+
