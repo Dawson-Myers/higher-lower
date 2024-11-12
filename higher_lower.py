@@ -4,6 +4,8 @@ from itertools import count
 from game_data import data
 import art
 """
+--Basic Game Layout and Actions--
+
 Print Art.Logo
 Compare A: {game_data}
 Print Art.VS
