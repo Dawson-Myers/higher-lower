@@ -1,4 +1,6 @@
 import random
+from itertools import count
+
 from game_data import data
 import art
 """
@@ -20,27 +22,54 @@ if answer INCORRECT update post
 def random_index():
     return random.randint(0, len(data) - 1)
 
-def game_data():
-    name = data[random_index()]['name']
-    follower_count = data[random_index()]['follower_count']
-    description = data[random_index()]['description']
-    country = data[random_index()]['country']
-    return name, follower_count, description, country
+def compare_a():
+    random_data = data[random_index()]
+    name = random_data['name']
+    description = random_data['description']
+    country = random_data['country']
+    follower_count = random_data['follower_count']
+    comparison  = print(f'Compare A: {name}, {description}, from {country}')
+    return comparison, follower_count
 
+def compare_b():
+    random_data = data[random_index()]
+    name = random_data['name']
+    description = random_data['description']
+    country = random_data['country']
+    follower_count = random_data['follower_count']
+    comparison = print(f'Agains B: {name}, {description}, from {country}')
+    return comparison, follower_count
 
     # print(gd.data[random_index()])
 
 def higher_lower():
     print(art.logo)
+    comparison_a, follower_count_a = compare_a()
+    print(art.vs)
+    comparison_b, follower_count_b = compare_b()
+    more_followers = input("Who has more followers? Type 'A' or 'B': ")
+    score = 0
+    if more_followers == 'A':
+        if follower_count_a > follower_count_b:
+            score += 1
+            print(f"You're right! Current Score: {score}")
+        else:
+            print(f"Sorry, that's wrong. Final Score: {score}")
+    elif more_followers == 'B':
+        if follower_count_b > follower_count_a:
+            score += 1
+            print(f"You're right! Current Score: {score}")
+        else:
+            print(f"Sorry, that's wrong. Final Score: {score}")
+    else:
+        print("Invalid choice")
+
 
 def play_game():
     pass
-    """ FIXME: Add logic for game state actions including updating CORRECT or INCORRECT status, Score, and input changes."""
+    """ FIXME: Add logic for game state actions including updating CORRECT or INCORRECT status, Score, and Question changes."""
 
-name, follower_count, description, country = game_data()
+# name, follower_count, description, country = game_data()
 
-print(name)
-print(follower_count)
-print(description)
-print(country)
-
+#
+higher_lower()
