@@ -1,11 +1,9 @@
 import random
-from itertools import count
-
 from game_data import data
 import art
-"""
---Basic Game Layout and Actions--
 
+
+"""
 Print Art.Logo
 Compare A: {game_data}
 Print Art.VS
@@ -45,26 +43,32 @@ def compare_b():
     # print(gd.data[random_index()])
 
 def higher_lower():
-    print(art.logo)
-    comparison_a, follower_count_a = compare_a()
-    print(art.vs)
-    comparison_b, follower_count_b = compare_b()
-    more_followers = input("Who has more followers? Type 'A' or 'B': ")
+    game_state = True
     score = 0
-    if more_followers == 'A':
-        if follower_count_a > follower_count_b:
-            score += 1
-            print(f"You're right! Current Score: {score}")
+    while game_state:
+        print(art.logo)
+        comparison_a, follower_count_a = compare_a()
+        print(art.vs)
+        comparison_b, follower_count_b = compare_b()
+        more_followers = input("Who has more followers? Type 'A' or 'B': ")
+        if more_followers == 'A':
+            if follower_count_a > follower_count_b:
+                score += 1
+                print(f"You're right! Current Score: {score}")
+                comparison_a = comparison_b
+
+            else:
+                print(f"Sorry, that's wrong. Final Score: {score}")
+                game_state = False
+        elif more_followers == 'B':
+            if follower_count_b > follower_count_a:
+                score += 1
+                print(f"You're right! Current Score: {score}")
+            else:
+                print(f"Sorry, that's wrong. Final Score: {score}")
+                game_state = False
         else:
-            print(f"Sorry, that's wrong. Final Score: {score}")
-    elif more_followers == 'B':
-        if follower_count_b > follower_count_a:
-            score += 1
-            print(f"You're right! Current Score: {score}")
-        else:
-            print(f"Sorry, that's wrong. Final Score: {score}")
-    else:
-        print("Invalid choice")
+            print("Invalid choice")
 
 
 def play_game():
