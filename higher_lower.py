@@ -34,7 +34,7 @@ def compare_b():
     description = random_data['description']
     country = random_data['country']
     follower_count = random_data['follower_count']
-    comparison = print(f'Agains B: {name}, {description}, from {country}')
+    comparison = print(f'Against B: {name}, {description}, from {country}')
     return comparison, follower_count
 
 
