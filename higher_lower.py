@@ -57,6 +57,8 @@ def higher_lower():
 
         # Ask user for guess
         guess = input("Who has more followers? 'A' or 'B': ").lower()
+        
+        # Adds a check for invalid inputs
         if guess != "a" and guess != "b":
             print("Invalid choice try again")
             guess = input("Who has more followers? 'A' or 'B': ").lower()
@@ -80,6 +82,7 @@ def higher_lower():
             print(f"Sorry, that's wrong. Final Score: {score}")
             play_game = False
 
+    # Create replay option for user
     while not play_game:
         replay = input("Would you like to play again? 'Y' or 'N': ").lower()
         if replay == "y":
