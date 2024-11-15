@@ -2,7 +2,6 @@ import random
 from game_data import data
 import art
 
-
 """
 Print Art.Logo
 Compare A: {game_data}
@@ -16,8 +15,10 @@ if answer INCORRECT update post
     Sorry, that's wrong. Final score: {score}
 """
 
+
 def random_index():
     return random.randint(0, len(data) - 1)
+
 
 def compare_a():
     random_data = data[random_index()]
@@ -25,8 +26,9 @@ def compare_a():
     description = random_data['description']
     country = random_data['country']
     follower_count = random_data['follower_count']
-    comparison  = print(f'Compare A: {name}, {description}, from {country}')
+    comparison = print(f'Compare A: {name}, {description}, from {country}')
     return comparison, follower_count
+
 
 def compare_b():
     random_data = data[random_index()]
@@ -36,7 +38,6 @@ def compare_b():
     follower_count = random_data['follower_count']
     comparison = print(f'Against B: {name}, {description}, from {country}')
     return comparison, follower_count
-
 
 
 def higher_lower():
@@ -54,7 +55,11 @@ def higher_lower():
             if follower_count_a > follower_count_b:
                 score += 1
                 output = f"You're right! Current Score: {score}"
-                # FIXME: Need to reassign the comparison_a with the values of comparison_b then issue only a new comparison_b for the next wave.
+                ''' 
+                    FIXME: Need to reassign the comparison_a with the values of comparison_b 
+                    then issue only a new comparison_b for the next wave.
+                '''
+
             else:
                 print(f"Sorry, that's wrong. Final Score: {score}")
                 game_state = False
@@ -77,3 +82,4 @@ else:
     print("\n" * 5)
     print("Thanks for playing!")
     print(art.logo)
+
