@@ -1,6 +1,6 @@
 import random
 from game_data import data
-import art
+from art import logo, vs
 
 """
 Print Art.Logo
@@ -15,71 +15,79 @@ if answer INCORRECT update post
     Sorry, that's wrong. Final score: {score}
 """
 
-
-def random_index():
-    return random.randint(0, len(data) - 1)
-
-
-def compare_a():
-    random_data = data[random_index()]
-    name = random_data['name']
-    description = random_data['description']
-    country = random_data['country']
-    follower_count = random_data['follower_count']
-    comparison = print(f'Compare A: {name}, {description}, from {country}')
-    return comparison, follower_count
+def format_data(account):
+    """Takes the account data and formats it into a printable format"""
+    account_name = account["name"]
+    account_descr = account["description"]
+    account_country = account["country"]
+    return f"{account_name}, a {account_descr}, from {account_country}"
 
 
-def compare_b():
-    random_data = data[random_index()]
-    name = random_data['name']
-    description = random_data['description']
-    country = random_data['country']
-    follower_count = random_data['follower_count']
-    comparison = print(f'Against B: {name}, {description}, from {country}')
-    return comparison, follower_count
+def check_ans(guess, a_followers, b_followers):
+    """Take a user's guess and the follower counts and returns if they got it right"""
+    if a_followers > b_followers:
+        return guess == "a"
+    else:
+        return guess == "b"
 
 
+# Makes game callable
 def higher_lower():
-    game_state = True
+    print(logo)
     score = 0
-    output = ''
-    while game_state:
-        print(art.logo)
-        print(output)
-        comparison_a, follower_count_a = compare_a()
-        print(art.vs)
-        comparison_b, follower_count_b = compare_b()
-        more_followers = input("Who has more followers? Type 'A' or 'B': ").lower()
-        if more_followers == 'a':
-            if follower_count_a > follower_count_b:
-                score += 1
-                output = f"You're right! Current Score: {score}"
-                ''' 
-                    FIXME: Need to reassign the comparison_a with the values of comparison_b 
-                    then issue only a new comparison_b for the next wave.
-                '''
+    play_game = True
 
-            else:
-                print(f"Sorry, that's wrong. Final Score: {score}")
-                game_state = False
-        elif more_followers == 'b':
-            if follower_count_b > follower_count_a:
-                score += 1
-                output = f"You're right! Current Score: {score}"
-            else:
-                print(f"Sorry, that's wrong. Final Score: {score}")
-                game_state = False
+    # Generate random data for account from game data
+    account_b = random.choice(data)
+
+    # Make game repeatable
+    while play_game:
+
+        # Setting account B the next position at account A. Then assigns new choice to account B
+        account_a = account_b
+        account_b = random.choice(data)
+
+        # Secondary check if both randomized data sets are the same and assigns new random data for account B
+        if account_b == account_a:
+            account_b = random.choice(data)
+
+        print(f"Compare A: {format_data(account_a)}.")
+        print(vs)
+        print(f"Against B: {format_data(account_b)}.")
+
+        # Ask user for guess
+        guess = input("Who has more followers? 'A' or 'B': ").lower()
+        if guess != "a" and guess != "b":
+            print("Invalid choice try again")
+            guess = input("Who has more followers? 'A' or 'B': ").lower()
+
+        # Clear Screen
+        print("\n" * 20)
+        print(logo)
+
+        # Get follower count for each account
+        a_follower_count = account_a["follower_count"]
+        b_follower_count = account_b["follower_count"]
+
+        # Check if user is correct
+        is_correct = check_ans(guess, a_follower_count, b_follower_count)
+
+        # Score keeping and user feedback
+        if is_correct:
+            score += 1
+            print(f"You're right! Current score: {score}")
         else:
-            print("Invalid choice")
+            print(f"Sorry, that's wrong. Final Score: {score}")
+            play_game = False
 
+    while not play_game:
+        replay = input("Would you like to play again? 'Y' or 'N': ").lower()
+        if replay == "y":
+            higher_lower()
+        else:
+            print("Thank you for playing Higher Lower!\n Created by: Dawson Myers")
 
 higher_lower()
-request_play = input("Would you like to play again? Type 'Y' or 'N': ").lower()
-if request_play == 'y':
-    higher_lower()
-else:
-    print("\n" * 5)
-    print("Thanks for playing!")
-    print(art.logo)
+
+
 
