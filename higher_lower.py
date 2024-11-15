@@ -85,7 +85,7 @@ def higher_lower():
         if replay == "y":
             higher_lower()
         else:
-            print("Thank you for playing Higher Lower!\n Created by: Dawson Myers")
+            print("Thank you for playing Higher Lower!\n Developed by: Dawson Myers")
 
 higher_lower()
 
